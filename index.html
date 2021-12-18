@@ -4,9 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NBA Quiz App</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+
 </head>
 <body>
-    
+    <!-- Start Quiz Button -->
+    <div class="start-btn"><button>Start Quiz</button></div>
+
+    <div class="info-box">
+        <div class="info-title">
+            <span>Some NBA Quiz Rules</span>
+        </div>
+        <div class="info-list">
+            <div class="info">1. You will have only <span> 15 seconds</span> per each question.</div>
+            <div class="info">2. Once you select your answer, you can't reselect.</div>
+            <div class="info">3. You can't select any option once time goes off.</div>
+            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+            <div class="info">5. You'll get points on the basis of your correct answers.</div>
+            <div class="info">Good Luck!</div>
+        </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Conitnue</button>
+        </div>
+    </div>
+
+    <!-- Quiz Box -->
+    <div class="quiz-box">
+        <header>
+            <div class="title">NBA Quiz Application</div>
+            <div class="timer">
+                <div class="time-text">Time Left</div>
+                <div class="timer-sec">15</div>
+            </div>
+        </header>
+        <section>
+            <div class="que-text">
+                <span>Who leads the NBA in most 3 pointers ever made?</span>
+            </div>
+            <div class="option-list">
+                <div class="option">
+                   <span>Reggie Miller</span>
+                   <div class="icon cross"><i type="checkbox"></i></div>
+                </div>
+            </div>
+            <div class="option-list">
+                <div class="option">
+                   <span>Stephen Curry</span>
+                   <div class="icon tick"><i class="checkbox"></i></div>
+                </div>
+            </div>
+            <div class="option-list">
+                <div class="option">
+                   <span>Ray Allen</span>
+                </div>
+            </div>
+            <div class="option-list">
+                <div class="option">
+                   <span>Jason Terry</span>
+                </div>
+            </div>
+        </section> 
+
+        <!-- Quiz Box Footer -->
+        <footer>
+            <div class="total-que">
+                <span><p>2</p>of<p>5</p>Questions</span>
+            </div>
+            <button class="next-btn">Next Question</button>
+
+        </footer>
+    </div>
+
 </body>
 </html>
