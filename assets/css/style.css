@@ -6,17 +6,23 @@
 
 
 body {
-    background: var(--primary-color);
+    background-image: url(../images/NBA_75-690x588.png);
+    background-size: cover;
+    background-position: 80%;
+    background-attachment: fixed;
     font-family: Helvetica, Arial, sans-serif;
 }
 
 .start-btn,
 .info-box,
-.quiz-box {
+.quiz-box,
+.result-box {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%)
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.2),
+                0px 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 /* Start Quiz Button */
@@ -33,11 +39,12 @@ body {
 }
 
 .info-box {
-    display: none;
     width: 540px;
     background: var(--secondary-color);
     border-radius: 5px;
-
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
 }
 
 .info-box .info-title {
@@ -88,20 +95,22 @@ body {
 }
 
 .buttons button.quit {
-    color:var(--tertiary-color);
+    color: black;
     border-color: var(--primary-color);
 }
 
 .buttons button.quit:hover {
+    color: var(--secondary-color);
     background: var(--primary-color);
 }
 
 .buttons button.restart {
-    color: var(--secondary-color);
+    color: black;
     border-color: var(--primary-color);
 }
 
 .buttons button.restart:hover {
+    color: white;
     background: var(--primary-color);
 }
 
@@ -109,6 +118,9 @@ body {
     width: 550px;
     background: var(--secondary-color);
     border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
 }
 
 .quiz-box header {
@@ -202,4 +214,110 @@ section .option-list .option:last-child {
     width: 26px;
     border: 2px solid transparent;
     border-radius: 50%;
+    text-align: center;
+    font-size: 13px;
+    line-height: 24px;
+    pointer-events: none;
+}
+
+.option-list .option .icon.tick {
+    color: green;
+    border-color: green;
+    background: rgb(116, 235, 116);
+}
+
+.option-list .option .icon.cross {
+    color: red;
+    border-color:red;
+    background: pink;
+}
+
+.quiz-box footer {
+    height: 60px;
+    width: 89%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quiz-box footer .total-que span{
+    display: flex;
+    user-select: none;
+}
+
+footer .total-que span p{
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+footer .next-btn{
+    height: 40px;
+    padding: 0 13px;
+    font-size: 18px;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    color: orange;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid orange;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+footer .next-btn:hover {
+    background: orange;
+    color: var(--secondary-color);
+}
+
+.result-box {
+    background: var(--secondary-color);
+    width: 450px;
+    padding: 25px 5px;
+    border-radius: 50px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+}
+
+.result-box .complete-text {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.result-box .score-text span{
+    display:flex;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight:500;
+}
+
+.score-text span p{
+    font-weight: 600;
+    padding: 0 4px;
+}
+
+.result-box .buttons {
+    display: flex;
+    margin: 20px 0;
+}
+
+.result-box .buttons button{
+    margin: 0 10px;
+    height: 45px;
+    padding: 0 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius:5px;
+    border:1px solid orange;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
