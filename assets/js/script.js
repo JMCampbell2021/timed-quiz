@@ -142,19 +142,18 @@ function showResultBox(){
 
 
 submitBtn.addEventListener("click", function(event) {
-    console.log("clicked the submit button!")
-    event.preventDefault();
+    event.preventDefault();  
+
+       var newScore = {
+            score: userScore,
+            userName: userNameInput.value.trim(),
+       }
     
-    var score = {
-        score: userScore,
-        userName: userNameInput.value.trim(),
-    };
+      // set score submission to local storage 
+        localStorage.setItem("highscores", JSON.stringify(newScore)); 
+});
 
-  // set score submission to local storage 
-    localStorage.setItem("user", JSON.stringify(score)); 
 
-    console.log(score)
-  });
 
 
 function startTimer(time){
