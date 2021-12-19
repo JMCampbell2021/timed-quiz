@@ -6,12 +6,12 @@ var quizBox = document.querySelector(".quiz-box");
 var timeCount = quizBox.querySelector(".timer .timer-sec")
 
 var optionList = document.querySelector(".option-list")
-var firstNameInput = document.querySelector("#first-name");
+var userNameInput = document.querySelector("#first-name");
 var submitBtn= document.querySelector(".buttons .submit");
 
 //Start Button Clicked 
 startBtn.onclick = ()=> {
-    infoBox.classList.add("activeInfo"); // show the info box
+    infoBox.classList.add("activeInfo"); 
 }
 
 //Exit Button Clicked
@@ -24,8 +24,8 @@ continueBtn.onclick = ()=> {
     infoBox.classList.remove("activeInfo");// hide the info box
     quizBox.classList.add("activeQuiz"); //show the quiz box
     showQuestion(0);
-    queConunter(1);
-    startTimer(24);
+    queCounter(1);
+    startTimer(timeValue);
 }
 
 var queCount = 0;
@@ -44,13 +44,9 @@ restartQuiz.onclick = ()=>{
     resultBox.classList.remove("activeResult");
     var queCount = 0;
     var queNumb = 1;
-    var counter;
-    var timeValue = 24;
     var userScore = 0;
     showQuestion(queCount);
-    queConunter(queNumb);  
-    clearInterval(counter);
-    startTimer(timeValue);
+    queCounter(queNumb);  
     nextBtn.style.display = "none";
 }
 
@@ -64,9 +60,8 @@ nextBtn.onclick = ()=> {
         queCount++;
         queNumb++;
         showQuestion(queCount);
-        queConunter(queNumb);  
-        clearInterval(counter);
-        startTimer(timeValue);
+        queCounter(queNumb);  
+        // clearInterval(counter);
         nextBtn.style.display = "none";
     }else {
         console.log("Questions completed")
@@ -95,12 +90,11 @@ var tickIcon = '<div class="icon tick">&#10003</div>'
 var crossIcon = '<div class="icon cross">&#x2717</div>'
 
 function optionSelected(answer){
-    clearInterval(counter);
     var userAns = answer.textContent;
     var correctAns = questions[queCount].answer;
     var allOptions = optionList.children.length;
     if(userAns == correctAns){
-        userScore += 1;
+        userScore += 20;
         console.log(userScore);
         answer.classList.add("correct");
         console.log("Answer is correct");
@@ -133,31 +127,33 @@ function showResultBox(){
     resultBox.classList.add("activeResult");// show the result box
     var scoreText = resultBox.querySelector(".score-text");
     if(userScore > 3){ 
-        var scoreTag = '<span><p>Congrats! You got</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        var scoreTag = '<span><p>Congrats! You scored</p><p>'+ userScore +'</p><p>out of</p><p>100</p></span>';
         scoreText.innerHTML = scoreTag;
     }
     if(userScore > 1){ 
-        var scoreTag = '<span><p>Nice Try! You got</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        var scoreTag = '<span><p>Nice Try! You scored</p><p>'+ userScore +'</p><p>out of</p><p>100</p></span>';
         scoreText.innerHTML = scoreTag;
     }
     else { 
-        var scoreTag = '<span><p>You fouled out with</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        var scoreTag = '<span><p>You fouled out with a score of </p><p>'+ userScore +'</p><p>out of</p><p>100</p></span>';
         scoreText.innerHTML = scoreTag;
     }
 }
 
 
-
 submitBtn.addEventListener("click", function(event) {
+    console.log("clicked the submit button!")
     event.preventDefault();
     
-    var user = {
-        firstName: firstNameInput.value.trim(),
-        Score: userScore
-    }
-    
+    var score = {
+        score: userScore,
+        userName: userNameInput.value.trim(),
+    };
+
   // set score submission to local storage 
-    localStorage.setItem("user", JSON.stringify(user)); 
+    localStorage.setItem("user", JSON.stringify(score)); 
+
+    console.log(score)
   });
 
 
@@ -171,14 +167,14 @@ function startTimer(time){
             timeCount.textContent = "0" + addZero;
         }
         if(time < 0){
-            clearInterval(counter);
+            // clearInterval(counter);
             timeCount.textContent = "00"
         }
       }
 }
 
 
-function queConunter(index) {
+function queCounter(index) {
     var bottomQueCounter = quizBox.querySelector(".total-que");
     var totalQuesCountTag = '<span><p>'+ index + '</p><p>of</p><p>'+ questions.length +'</p><p>Questions</p></span>';
     bottomQueCounter.innerHTML = totalQuesCountTag;
