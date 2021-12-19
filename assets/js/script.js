@@ -30,13 +30,32 @@ var queCount = 0;
 var queNumb = 1;
 var counter;
 var timeValue = 15;
+var userScore = 0;
 
 var nextBtn = quizBox.querySelector(".next-btn");
 var resultBox = document.querySelector(".result-box");
 var restartQuiz = resultBox.querySelector(".buttons .restart");
 var quitQuiz = resultBox.querySelector(".buttons .quit")
 
+restartQuiz.onclick = ()=>{ 
+    quizBox.classList.add("activeQuiz");
+    resultBox.classList.remove("activeResult");
+    var queCount = 0;
+    var queNumb = 1;
+    var counter;
+    var timeValue = 15;
+    var userScore = 0;
+    showQuestion(queCount);
+    queConunter(queNumb);  
+    clearInterval(counter);
+    startTimer(timeValue);
+    nextBtn.style.display = "none";
+}
 
+quitQuiz.onclick = ()=>{
+    window.location.reload();
+}
+  
 //Next Button Clicked
 nextBtn.onclick = ()=> {
     if(queCount < questions.length -1){
@@ -79,6 +98,8 @@ function optionSelected(answer){
     var correctAns = questions[queCount].answer;
     var allOptions = optionList.children.length;
     if(userAns == correctAns){
+        userScore += 1;
+        console.log(userScore);
         answer.classList.add("correct");
         console.log("Answer is correct");
         answer.insertAdjacentHTML("beforeend", tickIcon)
@@ -105,9 +126,22 @@ function optionSelected(answer){
 
 
 function showResultBox(){
-    infoBox.classList.remove("activeInfo");// hide the info box
+    infoBox.classList.remove("activeInfo");//hide the info box
     quizBox.classList.remove("activeQuiz");// hide the quiz box
     resultBox.classList.add("activeResult");// show the result box
+    var scoreText = resultBox.querySelector(".score-text");
+    if(userScore > 3){ 
+        var scoreTag = '<span><p>Congrats! You got</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    if(userScore > 1){ 
+        var scoreTag = '<span><p>Nice Try! You got</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else { 
+        var scoreTag = '<span><p>You fouled out with</p><p>'+ userScore +'</p><p>out of</p><p>'+ questions.length +'</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
 }
 
 
