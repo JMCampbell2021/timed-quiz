@@ -6,6 +6,8 @@ var quizBox = document.querySelector(".quiz-box");
 var timeCount = quizBox.querySelector(".timer .timer-sec")
 
 var optionList = document.querySelector(".option-list")
+var firstNameInput = document.querySelector("#first-name");
+var submitBtn= document.querySelector(".buttons .submit");
 
 //Start Button Clicked 
 startBtn.onclick = ()=> {
@@ -23,13 +25,13 @@ continueBtn.onclick = ()=> {
     quizBox.classList.add("activeQuiz"); //show the quiz box
     showQuestion(0);
     queConunter(1);
-    startTimer(15);
+    startTimer(24);
 }
 
 var queCount = 0;
 var queNumb = 1;
 var counter;
-var timeValue = 15;
+var timeValue = 24;
 var userScore = 0;
 
 var nextBtn = quizBox.querySelector(".next-btn");
@@ -43,7 +45,7 @@ restartQuiz.onclick = ()=>{
     var queCount = 0;
     var queNumb = 1;
     var counter;
-    var timeValue = 15;
+    var timeValue = 24;
     var userScore = 0;
     showQuestion(queCount);
     queConunter(queNumb);  
@@ -54,7 +56,7 @@ restartQuiz.onclick = ()=>{
 
 quitQuiz.onclick = ()=>{
     window.location.reload();
-}
+} 
   
 //Next Button Clicked
 nextBtn.onclick = ()=> {
@@ -144,6 +146,19 @@ function showResultBox(){
     }
 }
 
+
+
+submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    var user = {
+        firstName: firstNameInput.value.trim(),
+        Score: userScore
+    }
+    
+  // set score submission to local storage 
+    localStorage.setItem("user", JSON.stringify(user)); 
+  });
 
 
 function startTimer(time){

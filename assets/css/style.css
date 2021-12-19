@@ -126,6 +126,16 @@ body {
     background: var(--primary-color);
 }
 
+.buttons button.submit {
+    color: black;
+    border-color: var(--primary-color);
+}
+
+.buttons button.submit:hover {
+    color: white;
+    background: var(--primary-color);
+}
+
 .quiz-box {
     width: 550px;
     background: var(--secondary-color);
@@ -305,7 +315,7 @@ footer .next-btn:hover {
     background: var(--secondary-color);
     width: 450px;
     padding: 25px 5px;
-    border-radius: 50px;
+    border-radius: 10px;
     display: flex;
     text-align: center;
     align-items: center;
@@ -338,7 +348,8 @@ footer .next-btn:hover {
     margin: 20px 0;
 }
 
-.result-box .buttons button{
+.result-box .buttons button,
+.result-box .input-group .button {
     margin: 0 10px;
     height: 45px;
     padding: 0 20px;
