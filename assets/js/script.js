@@ -11,7 +11,7 @@ var submitBtn= document.querySelector(".buttons .submit");
 
 //Start Button Clicked 
 startBtn.onclick = ()=> {
-    infoBox.classList.add("activeInfo"); 
+    infoBox.classList.add("activeInfo"); //show the info box
 }
 
 //Exit Button Clicked
@@ -40,18 +40,12 @@ var restartQuiz = resultBox.querySelector(".buttons .restart");
 var quitQuiz = resultBox.querySelector(".buttons .quit")
 
 restartQuiz.onclick = ()=>{ 
-    quizBox.classList.add("activeQuiz");
-    resultBox.classList.remove("activeResult");
-    var queCount = 0;
-    var queNumb = 1;
-    var userScore = 0;
-    showQuestion(queCount);
-    queCounter(queNumb);  
-    nextBtn.style.display = "none";
+    window.location.reload("activeQuiz")
 }
-
+    
 quitQuiz.onclick = ()=>{
     window.location.reload();
+    // window.location.assign("/") for Highscore page
 } 
   
 //Next Button Clicked
@@ -101,14 +95,14 @@ function optionSelected(answer){
         answer.insertAdjacentHTML("beforeend", tickIcon)
     }else{
         answer.classList.add("incorrect");
-        console.log("Answer is wrong")
-        answer.insertAdjacentHTML("beforeend", crossIcon)
+        console.log("Answer is wrong");
+        answer.insertAdjacentHTML("beforeend", crossIcon);
 
         //if answers is incorrect then automactically select the correct answer
         for (let i=0; i < allOptions; i++) {
             if(optionList.children[i].textContent == correctAns){
                 optionList.children[i].setAttribute("class", "option correct");
-                optionList.children[i].insertAdjacentHTML("beforeend", tickIcon)
+                optionList.children[i].insertAdjacentHTML("beforeend", tickIcon);
             }
         }
     }
@@ -120,17 +114,17 @@ function optionSelected(answer){
     nextBtn.style.display = "block";
 }
 
-
+// Result and score
 function showResultBox(){
     infoBox.classList.remove("activeInfo");//hide the info box
     quizBox.classList.remove("activeQuiz");// hide the quiz box
     resultBox.classList.add("activeResult");// show the result box
     var scoreText = resultBox.querySelector(".score-text");
-    if(userScore > 3){ 
+    if(userScore > 80){ 
         var scoreTag = '<span><p>Congrats! You scored</p><p>'+ userScore +'</p><p>out of</p><p>100</p></span>';
         scoreText.innerHTML = scoreTag;
     }
-    if(userScore > 1){ 
+    if(userScore > 20){ 
         var scoreTag = '<span><p>Nice Try! You scored</p><p>'+ userScore +'</p><p>out of</p><p>100</p></span>';
         scoreText.innerHTML = scoreTag;
     }
@@ -146,11 +140,15 @@ submitBtn.addEventListener("click", function(event) {
 
        var newScore = {
             score: userScore,
-            userName: userNameInput.value.trim(),
+            userName: userNameInput.value
        }
     
       // set score submission to local storage 
         localStorage.setItem("highscores", JSON.stringify(newScore)); 
+
+        var highScore = JSON.parse(localStorage.getItem("highscores"))
+        console.log(highScore)
+
 });
 
 
@@ -166,8 +164,8 @@ function startTimer(time){
             timeCount.textContent = "0" + addZero;
         }
         if(time < 0){
-            // clearInterval(counter);
             timeCount.textContent = "00"
+            showResultBox();
         }
       }
 }
